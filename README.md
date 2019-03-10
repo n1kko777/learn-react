@@ -1,2 +1,1 @@
-# learn-react
-Geekbrains
+# Geekbrains (ReactJS)
