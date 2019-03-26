@@ -1,12 +1,11 @@
 // Task 1
 const loop = (times = 0, callback = null) => {
-  if (callback !== null) {
+  if (typeof callback == 'function') {
     for (let index = 0; index < times; index++) {
       callback(index);
     }
   } else {
     console.log('callback is null!');
-
   }
 };
 
@@ -60,7 +59,11 @@ class Developer extends Employee {
   }
 
   setManager(manager) {
+    if (this.manager !== undefined) {
+      this.manager.removeDev(this);
+    }
     this.manager = manager;
+    this.manager.addDev(this);
   }
   displayInfo() {
     super.displayInfo();
@@ -73,9 +76,13 @@ class Manager extends Employee {
   }
   addDev(developer) {
     this.devTeams.push(developer);
+    developer.manager = this;
   }
   removeDev(developer) {
-    this.devTeams.splice(this.devTeams.indexOf(developer.name), 1);
+    if (this.devTeams.includes(developer)) {
+      this.devTeams.splice(this.devTeams.indexOf(developer.name), 1);
+      developer.manager = undefined;
+    }
   }
   displayInfo() {
     super.displayInfo();
@@ -88,36 +95,29 @@ const hum = new Human('Nikita', 20, '24.06.1998');
 const empl = new Employee('Nikita', 20, '24.06.1998', 50000, 'Frontend');
 const dev = new Developer('Nikita', 20, '24.06.1998', 50000, 'Frontend');
 const mn = new Manager('Ivan', 30, '22.06.1988', 30000, 'Frontend');
+const newMn = new Manager('Petr', 25, '22.06.1992', 150000, 'Frontend');
 // show
 hum.displayInfo();
 empl.displayInfo();
 dev.displayInfo();
 mn.displayInfo();
+newMn.displayInfo();
+
 // changes
 mn.addDev(dev);
 mn.removeDev(dev);
 
-dev.setManager(mn);
+dev.setManager(newMn);
 
-// shoow
-dev.displayInfo();
-mn.displayInfo();
 
 console.log('\n');
 // Tsk 4
 let promiseArray = [];
 
 for (let i = 0; i < 10; i++) {
-  promiseArray[i] = new Promise((resolve, reject) => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${i+1}`)
-      .then(response => response.json())
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
+  promiseArray[i] = fetch(`https://jsonplaceholder.typicode.com/users/${i+1}`)
+    .then(response => response.json());
+
 }
 
 Promise.all(promiseArray)
