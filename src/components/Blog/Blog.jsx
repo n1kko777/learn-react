@@ -5,10 +5,7 @@ import Post from "./Post";
 import "./style.css";
 
 class Blog extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+
   render() {
     const posts = this.props.blogPosts.map(item => (
       <Post key={item.id} title={item.title} body={item.body} />

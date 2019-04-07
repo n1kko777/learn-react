@@ -1,10 +1,7 @@
 import React, { Fragment, Component } from "react";
 
 class Post extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+
   render() {
 
     const { title, body } = this.props;
