@@ -27,10 +27,6 @@ class WelcomeModal extends Component {
       </div>
     );
   }
-
-  componentDidMount() {
-    this.toggleModal();
-  }
 }
 
 export default WelcomeModal;

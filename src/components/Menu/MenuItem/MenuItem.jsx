@@ -1,18 +1,32 @@
 import React from "react";
+import { Link } from "react-router";
 
 class MenuItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: false
+    };
+  }
+
   render() {
     const { href, children } = this.props;
     return (
-      <a className="navbar-item" href={href}>
+      <Link
+        className={
+          "navbar-item" +
+          (window.location.pathname === href ? " is-active" : "")
+        }
+        to={href}
+      >
         {children}
-      </a>
+      </Link>
     );
   }
 }
 
 MenuItem.defaultProps = {
-  children: "Home",
+  children: "Главная",
   href: "/"
 };
 
