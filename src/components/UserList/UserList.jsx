@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import UserStore from "../../stores/userStore";
+import { addUser, getUsers } from "../../actions/userActions";
 
 import User from "./User";
 
@@ -9,7 +10,28 @@ class UserList extends Component {
     this.state = {
       users: []
     };
+
+    this.onUserChange = this.onUserChange.bind(this);
+    this.newUser = this.newUser.bind(this);
   }
+
+  onUserChange() {
+    this.setState({ users: UserStore.users });
+  }
+
+  newUser() {
+    const [id, name, username, email, phone, website] = [
+      100,
+      "Никита",
+      "n1kko777",
+      "info@info.com",
+      "8900345123678",
+      "www.mySuperWebSite.pro"
+    ];
+
+    addUser(id, name, username, email, phone, website);
+  }
+
   render() {
     if (!this.state.users) {
       return null;
@@ -21,16 +43,24 @@ class UserList extends Component {
 
     return (
       <>
-        <h1 className="title">Пользователи</h1>
+        <div className="add-button">
+          <h1 className="title is-marginless">Пользователи</h1>
+          <button className="button is-medium" onClick={this.newUser}>
+            <i className="fa fa-plus" />
+          </button>
+        </div>
         {users}
       </>
     );
   }
 
   componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/users/").then(response => {
-      this.setState({ users: response.data });
-    });
+    UserStore.on("change", this.onUserChange);
+    getUsers();
+  }
+
+  componentWillUnmount() {
+    UserStore.removeListener("change", this.onUserChange);
   }
 }
 
