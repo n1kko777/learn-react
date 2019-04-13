@@ -14,8 +14,15 @@ class Layout extends Component {
         { name: "Пользователи", href: "/users" },
         { name: "Посты", href: "/posts" },
         { name: "Комментарии", href: "/comments" }
-      ]
+      ],
+      modal: false
     };
+
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal() {
+    this.setState({ modal: !this.state.modal });
   }
 
   render() {
@@ -23,8 +30,13 @@ class Layout extends Component {
 
     return (
       <Fragment>
-        <Menu menuItems={menuItems} />
-        <WelcomeModal />
+        <Menu menuItems={menuItems} toggleModal={this.toggleModal} />
+        {this.state.modal ? (
+          <WelcomeModal
+            modal={this.state.modal}
+            toggleModal={this.toggleModal}
+          />
+        ) : null}
         <div className="container">
           <div className="wrapper">{this.props.children}</div>
         </div>

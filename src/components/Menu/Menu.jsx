@@ -21,7 +21,7 @@ class Menu extends Component {
 
   render() {
     const { openNav } = this.state;
-    const { menuItems } = this.props;
+    const { menuItems, toggleModal } = this.props;
 
     const items = menuItems.map((item, i) => (
       <MenuItem
@@ -69,7 +69,7 @@ class Menu extends Component {
               <div className="navbar-item">
                 <div className="buttons">
                   <a className="button is-primary">
-                    <strong>Вход</strong>
+                    <strong onClick={toggleModal}>Вход</strong>
                   </a>
                 </div>
               </div>
