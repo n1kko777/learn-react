@@ -1,51 +1,46 @@
 import React, { Fragment, Component } from "react";
 
-// Components
-import Menu from "./components/Menu";
-import WelcomeModal from "./components/WelcomeModal";
-import Blog from "./components/Blog";
+// Router
+import { Router, Route, IndexRoute, browserHistory } from "react-router";
+
+// Layout
+import Layout from "./layouts/Layout";
+
+// Pages
+import MainPage from "./pages/Main";
+import Users from "./pages/Users";
+import User from "./pages/Users/User";
+import Posts from "./pages/Posts";
+import Post from "./pages/Posts/Post";
+import Comments from "./pages/Comments";
+import Comment from "./pages/Comments/Comment";
+import PageNotFound from "./pages/PageNotFound";
 
 // Styles
 import "bulma/css/bulma.css";
 import "./style.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuItems: [
-        { name: "Home", href: "/" },
-        { name: "About", href: "/about" },
-        { name: "My works", href: "/works" },
-        { name: "Contact", href: "/contacts" }
-      ],
-      blogPosts: []
-    };
-  }
   render() {
-    const { menuItems, blogPosts } = this.state;
-
     return (
       <Fragment>
-        <Menu menuItems={menuItems} />
-        <WelcomeModal />
-        <div className="container">
-          <div className="wrapper">
-            <Blog blogPosts={blogPosts} />
-          </div>
-        </div>
+        <Router history={browserHistory}>
+          <Route path="/" component={Layout}>
+            <IndexRoute component={MainPage} />
+            <Route path="users" component={Users}>
+              <Route path=":userId" component={User} />
+            </Route>
+            <Route path="posts" component={Posts}>
+              <Route path=":postId" component={Post} />
+            </Route>
+            <Route path="comments" component={Comments}>
+              <Route path=":commentId" component={Comment} />
+            </Route>
+            <Route path="*" component={PageNotFound} />
+          </Route>
+        </Router>
       </Fragment>
     );
-  }
-
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({
-          blogPosts: data
-        });
-      });
   }
 }
 

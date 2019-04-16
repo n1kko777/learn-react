@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router";
 import MenuItem from "./MenuItem";
 
 class Menu extends Component {
@@ -20,7 +21,7 @@ class Menu extends Component {
 
   render() {
     const { openNav } = this.state;
-    const { menuItems } = this.props;
+    const { menuItems, toggleModal } = this.props;
 
     const items = menuItems.map((item, i) => (
       <MenuItem
@@ -35,12 +36,19 @@ class Menu extends Component {
     ));
     return (
       <nav
-        className="navbar is-fixed-top is-light"
+        className="navbar is-fixed-top is-dark"
         role="navigation"
         aria-label="main navigation"
       >
         <div className="container">
           <div className="navbar-brand">
+            <Link className="navbar-item" to="/">
+              <img
+                src="https://bulma.io/images/bulma-logo-white.png"
+                width="112"
+                height="28"
+              />
+            </Link>
             <a
               role="button"
               className={openNav ? "navbar-burger is-active" : "navbar-burger"}
@@ -57,6 +65,15 @@ class Menu extends Component {
           </div>
           <div className={openNav ? "navbar-menu is-active" : "navbar-menu"}>
             <div className="navbar-start">{items}</div>
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="buttons">
+                  <a className="button is-primary">
+                    <strong onClick={toggleModal}>Вход</strong>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
