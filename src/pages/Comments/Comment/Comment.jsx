@@ -1,37 +1,27 @@
 import React, { Component } from "react";
-import axios from "axios";
-
 import CommentProfile from "../../../components/CommentList/Comment";
 
-class Comment extends Component {
-  constructor(props) {
-    super(props);
+// redux
+import { connect } from "react-redux";
+import { fetchComment } from "../../../actions/commentsActions";
 
-    this.state = {
-      comment: null
-    };
-  }
+class Comment extends Component {
   render() {
     return (
       <>
-        {this.state.comment && (
-          <CommentProfile isLink={false} {...this.state.comment} />
+        {this.props.comment && (
+          <CommentProfile isLink={false} {...this.props.comment} />
         )}
       </>
     );
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        `https://jsonplaceholder.typicode.com/comments/${
-          this.props.params.commentId
-        }`
-      )
-      .then(response => {
-        this.setState({ comment: response.data });
-      });
+  componentWillMount() {
+    this.props.fetchComment(this.props.params.commentId);
   }
 }
 
-export default Comment;
+export default connect(
+  null,
+  { fetchComment }
+)(Comment);

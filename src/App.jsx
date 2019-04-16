@@ -1,4 +1,8 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
+
+// redux
+import { Provider } from "react-redux";
+import store from "./store";
 
 // Router
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
@@ -20,10 +24,11 @@ import PageNotFound from "./pages/PageNotFound";
 import "bulma/css/bulma.css";
 import "./style.css";
 
+
 class App extends Component {
   render() {
     return (
-      <Fragment>
+      <Provider store={store}>
         <Router history={browserHistory}>
           <Route path="/" component={Layout}>
             <IndexRoute component={MainPage} />
@@ -39,7 +44,7 @@ class App extends Component {
             <Route path="*" component={PageNotFound} />
           </Route>
         </Router>
-      </Fragment>
+      </Provider>
     );
   }
 }

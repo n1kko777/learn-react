@@ -1,37 +1,38 @@
-import React, { Component } from "react";
-import axios from "axios";
-
+import React, { Fragment, Component } from "react";
 import Comment from "./Comment";
 
+// redux
+import { connect } from "react-redux";
+import { fetchComments } from "../../actions/commentsActions";
+
 class CommentList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      comments: []
-    };
-  }
   render() {
-    if (!this.state.comments) {
+    if (!this.props.comments) {
       return null;
     }
 
-    const comments = this.state.comments.map((comment, index) => {
+    const comments = this.props.comments.map((comment, index) => {
       return <Comment isLink={true} key={index} {...comment} />;
     });
 
     return (
-      <>
+      <Fragment>
         <h1 className="title">Комменты</h1>
         {comments}
-      </>
+      </Fragment>
     );
   }
 
-  componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/comments/").then(response => {
-      this.setState({ comments: response.data });
-    });
+  componentWillMount() {
+    this.props.fetchComments();
   }
 }
 
-export default CommentList;
+const mapStateToProps = state => ({
+  comments: state.comments.comments
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchComments }
+)(CommentList);
