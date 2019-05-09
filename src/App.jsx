@@ -27,15 +27,15 @@ class App extends Component {
         <Router history={browserHistory}>
           <Route path="/" component={Layout}>
             <IndexRoute component={MainPage} />
-            <Route path="users" component={Users}>
-              <Route path=":userId" component={User} />
-            </Route>
-            <Route path="posts" component={Posts}>
-              <Route path=":postId" component={Post} />
-            </Route>
-            <Route path="comments" component={Comments}>
-              <Route path=":commentId" component={Comment} />
-            </Route>
+            <Router path="users" component={Users}>
+              <Router path=":userId" component={User} />
+            </Router>
+            <Router path="posts" component={Posts}>
+              <Router path=":postId" component={Post} />
+            </Router>
+            <Router path="comments" component={Comments}>
+              <Router path=":commentId" component={Comment} />
+            </Router>
             <Route path="*" component={PageNotFound} />
           </Route>
         </Router>
