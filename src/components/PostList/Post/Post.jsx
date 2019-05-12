@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router";
+import { NavLink } from "react-router-dom";
 
 class Post extends Component {
   render() {
@@ -12,9 +12,9 @@ class Post extends Component {
             <div className="content">
               {isLink ? (
                 <>
-                  <Link to={`/posts/${id}`} className="is-size-4">
+                  <NavLink to={`/posts/${id}`} className="is-size-4">
                     {title}
-                  </Link>
+                  </NavLink>
                   <br />
                   <br />
                 </>

@@ -15,7 +15,7 @@ class User extends Component {
   }
 
   componentDidMount() {
-    this.props.onFetchUser(this.props.userId);
+    this.props.onFetchUser(parseInt(this.props.match.params.userId));
   }
 }
 
