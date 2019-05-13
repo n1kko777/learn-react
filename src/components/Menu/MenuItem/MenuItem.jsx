@@ -1,6 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+// Redux
+import { connect } from "react-redux";
+import { toggleNav } from "../../../actions/toggle-nav";
+
 class MenuItem extends React.Component {
   constructor(props) {
     super(props);
@@ -31,4 +35,13 @@ MenuItem.defaultProps = {
   href: "/"
 };
 
-export default MenuItem;
+export default connect(
+  state => ({
+    openNav: state.openNav
+  }),
+  dispatch => ({
+    onToggleNav: (event, openNav) => {
+      dispatch(toggleNav(event, openNav));
+    }
+  })
+)(MenuItem);

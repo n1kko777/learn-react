@@ -1,6 +1,12 @@
 export default function reducer(state = [], action) {
-  if (action.type === "FETCH_USERS") {
-    return action.payload;
+  switch (action.type) {
+    case "FETCH_USERS":
+      return action.payload;
+    case "ERROR_USERS":
+      return action.payload;
+
+    default:
+      break;
   }
 
   return state;

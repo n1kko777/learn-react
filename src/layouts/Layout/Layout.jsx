@@ -9,12 +9,6 @@ class Layout extends Component {
     super(props);
 
     this.state = {
-      menuItems: [
-        { name: "Главная", href: "/" },
-        { name: "Пользователи", href: "/users" },
-        { name: "Посты", href: "/posts" },
-        { name: "Комментарии", href: "/comments" }
-      ],
       modal: false
     };
 
@@ -26,11 +20,9 @@ class Layout extends Component {
   }
 
   render() {
-    const { menuItems } = this.state;
-    
     return (
       <Fragment>
-        <Menu menuItems={menuItems} toggleModal={this.toggleModal} />
+        <Menu toggleModal={this.toggleModal} />
         {this.state.modal ? (
           <WelcomeModal
             modal={this.state.modal}

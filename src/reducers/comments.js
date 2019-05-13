@@ -3,5 +3,9 @@ export default function reducer(state = [], action) {
     return action.payload;
   }
 
+  if (action.type === "ERROR_COMMENTS") {
+    return action.payload;
+  }
+
   return state;
 }

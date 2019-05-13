@@ -1,33 +1,18 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+
+// Redux
+import { connect } from "react-redux";
+import { toggleNav } from "../../actions/toggle-nav";
+
 import MenuItem from "./MenuItem";
 
 class Menu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openNav: false
-    };
-
-    this.toggleNav = this.toggleNav.bind(this);
-  }
-
-  toggleNav(e) {
-    e.preventDefault();
-    this.setState(state => {
-      return { openNav: !state.openNav };
-    });
-  }
-
   render() {
-    const { openNav } = this.state;
-    const { menuItems, toggleModal } = this.props;
+    const { onToggleNav, openNav, menuItems, toggleModal } = this.props;
 
     const items = menuItems.map((item, i) => (
       <MenuItem
-        onClick={e => {
-          this.toggleNav(e);
-        }}
         key={i}
         href={item.href}
       >
@@ -53,7 +38,7 @@ class Menu extends Component {
               role="button"
               className={openNav ? "navbar-burger is-active" : "navbar-burger"}
               onClick={e => {
-                this.toggleNav(e);
+                onToggleNav(e, openNav);
               }}
               aria-label="menu"
               aria-expanded="false"
@@ -81,4 +66,14 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default connect(
+  state => ({
+    menuItems: state.menuItems,
+    openNav: state.openNav
+  }),
+  dispatch => ({
+    onToggleNav: (event, openNav) => {
+      dispatch(toggleNav(event, openNav));
+    }
+  })
+)(Menu);
