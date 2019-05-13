@@ -20,9 +20,8 @@ class Post extends Component {
 }
 
 export default connect(
-  (state, ownProps) => ({
-    post: state.post,
-    ownProps: ownProps
+  (state) => ({
+    post: state.post
   }),
   dispatch => ({
     onFetchPost: userID => {

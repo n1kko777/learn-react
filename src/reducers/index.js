@@ -6,9 +6,14 @@ import user from "./user";
 import posts from './posts';
 import post from './post';
 
+import comments from './comments';
+import comment from './comment';
+
 export default combineReducers({
     users,
     user,
     posts,
-    post
+    post,
+    comments,
+    comment
   });
