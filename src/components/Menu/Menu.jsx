@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router";
 import MenuItem from "./MenuItem";
 
 class Menu extends Component {
@@ -42,13 +42,13 @@ class Menu extends Component {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink className="navbar-item" to="/">
+            <Link className="navbar-item" to="/">
               <img
                 src="https://bulma.io/images/bulma-logo-white.png"
                 width="112"
                 height="28"
               />
-            </NavLink>
+            </Link>
             <a
               role="button"
               className={openNav ? "navbar-burger is-active" : "navbar-burger"}

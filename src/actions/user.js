@@ -1,10 +1,11 @@
 import axios from "axios";
 
-export const fetchUser = userID => dispatch => {
-  console.log("action");
-
+export const fetchUser = (userID) => dispatch => {
+  
   axios
-    .get(`https://jsonplaceholder.typicode.com/users/${userID}`)
+    .get(
+      `https://jsonplaceholder.typicode.com/users/${userID}`
+    )
     .then(response => {
       dispatch({ type: "FETCH_USER", payload: response.data });
     })

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router";
 
 class MenuItem extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class MenuItem extends React.Component {
   render() {
     const { href, children } = this.props;
     return (
-      <NavLink
+      <Link
         className={
           "navbar-item" +
           (window.location.pathname === href ? " is-active" : "")
@@ -20,7 +20,7 @@ class MenuItem extends React.Component {
         to={href}
       >
         {children}
-      </NavLink>
+      </Link>
     );
   }
 }

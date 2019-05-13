@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 
 // Router
-import { Route, Switch } from "react-router-dom";
+import { Router, Route, IndexRoute, browserHistory } from "react-router";
 
 // Layout
 import Layout from "./layouts/Layout";
@@ -23,19 +23,23 @@ import "./style.css";
 class App extends Component {
   render() {
     return (
-      <>
-        <Route path="/" component={Layout} />
-        <Switch>
-          <Route exact path="/" component={MainPage} />
-          <Route exact path="/users" component={Users} />
-          <Route path="/users/:userId" component={User} />
-          <Route exact path="/posts" component={Posts} />
-          <Route path="/posts/:postId" component={Post} />
-          <Route exact path="/comments" component={Comments} />
-          <Route path="/comments/:commentId" component={Comment} />
-          <Route component={PageNotFound} />
-        </Switch>
-      </>
+      <Fragment>
+        <Router history={browserHistory}>
+          <Route path="/" component={Layout}>
+            <IndexRoute component={MainPage} />
+            <Router path="users" component={Users}>
+              <Router path=":userId" component={User} />
+            </Router>
+            <Router path="posts" component={Posts}>
+              <Router path=":postId" component={Post} />
+            </Router>
+            <Router path="comments" component={Comments}>
+              <Router path=":commentId" component={Comment} />
+            </Router>
+            <Route path="*" component={PageNotFound} />
+          </Route>
+        </Router>
+      </Fragment>
     );
   }
 }
