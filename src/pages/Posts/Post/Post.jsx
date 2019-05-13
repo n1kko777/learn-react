@@ -1,33 +1,32 @@
 import React, { Component } from "react";
-import axios from "axios";
+// Redux
+import { connect } from "react-redux";
+import { fetchPost } from "../../../actions/post";
 
 import PostProfile from "../../../components/PostList/Post";
 
 class Post extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      post: null
-    };
-  }
   render() {
     return (
       <>
-        {this.state.post && <PostProfile isLink={false} {...this.state.post} />}
+        {this.props.post && <PostProfile isLink={false} {...this.props.post} />}
       </>
     );
   }
 
   componentDidMount() {
-    axios
-      .get(
-        `https://jsonplaceholder.typicode.com/posts/${this.props.params.postId}`
-      )
-      .then(response => {
-        this.setState({ post: response.data });
-      });
+    this.props.onFetchPost(parseInt(this.props.match.params.postId));
   }
 }
 
-export default Post;
+export default connect(
+  (state, ownProps) => ({
+    post: state.post,
+    ownProps: ownProps
+  }),
+  dispatch => ({
+    onFetchPost: userID => {
+      dispatch(fetchPost(userID));
+    }
+  })
+)(Post);

@@ -20,9 +20,8 @@ class User extends Component {
 }
 
 export default connect(
-  (state, ownProps) => ({
-    user: state.user,
-    ownProps: ownProps
+  (state) => ({
+    user: state.user
   }),
   dispatch => ({
     onFetchUser: userID => {
