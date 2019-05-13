@@ -23,8 +23,7 @@ import "./style.css";
 class App extends Component {
   render() {
     return (
-      <>
-        <Route path="/" component={Layout} />
+      <Layout>
         <Switch>
           <Route exact path="/" component={MainPage} />
           <Route exact path="/users" component={Users} />
@@ -35,7 +34,7 @@ class App extends Component {
           <Route path="/comments/:commentId" component={Comment} />
           <Route component={PageNotFound} />
         </Switch>
-      </>
+      </Layout>
     );
   }
 }

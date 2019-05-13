@@ -11,6 +11,7 @@ class MenuItem extends React.Component {
 
   render() {
     const { href, children } = this.props;
+
     return (
       <NavLink
         className={

@@ -8,7 +8,7 @@ import App from "./App";
 ReactDom.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Route path="/" component={App} />
+      <App />
     </BrowserRouter>
   </Provider>,
   // указываем куда будет вставляться React приложение на странице

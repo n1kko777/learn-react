@@ -27,7 +27,7 @@ class Layout extends Component {
 
   render() {
     const { menuItems } = this.state;
-
+    
     return (
       <Fragment>
         <Menu menuItems={menuItems} toggleModal={this.toggleModal} />
