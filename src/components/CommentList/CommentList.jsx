@@ -6,7 +6,6 @@ import { fetchComments } from "../../actions/comments";
 import Comment from "./Comment";
 
 class CommentList extends Component {
-  
   render() {
     if (!this.props.comments) {
       return null;
@@ -30,7 +29,7 @@ class CommentList extends Component {
 }
 
 export default connect(
-  (state) => ({
+  state => ({
     comments: state.comments
   }),
   dispatch => ({

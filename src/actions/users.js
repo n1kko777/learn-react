@@ -7,11 +7,16 @@ export const fetchUsers = () => dispatch => {
       dispatch({ type: "FETCH_USERS", payload: response.data });
     })
     .catch(error => {
-      dispatch({ type: "ERROR_USERS", payload: [{
-        name: error.message,
-        username: "n1kko777",
-        website: "Please, try later",
-        isLink: false
-      }] });
+      dispatch({
+        type: "ERROR_USERS",
+        payload: [
+          {
+            name: error.message,
+            username: "n1kko777",
+            website: "Please, try later",
+            isLink: false
+          }
+        ]
+      });
     });
 };

@@ -29,7 +29,7 @@ class PostList extends Component {
 }
 
 export default connect(
-  (state) => ({
+  state => ({
     posts: state.posts
   }),
   dispatch => ({

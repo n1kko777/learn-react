@@ -12,7 +12,10 @@ class WelcomeModal extends Component {
 
     return (
       <div className={modal ? "modal is-active" : "modal"}>
-        <div onClick={() => onToggleModal(modal)} className="modal-background" />
+        <div
+          onClick={() => onToggleModal(modal)}
+          className="modal-background"
+        />
         <div className="modal-content">
           <Login />
         </div>
@@ -31,7 +34,7 @@ export default connect(
     modal: state.modal
   }),
   dispatch => ({
-    onToggleModal: (modal) => {
+    onToggleModal: modal => {
       dispatch(toggleModal(modal));
     }
   })

@@ -1,3 +1,3 @@
-export const toggleModal = (modal) => dispatch => {
+export const toggleModal = modal => dispatch => {
   dispatch({ type: "MODAL", payload: !modal });
 };

@@ -22,7 +22,7 @@ class Comment extends Component {
 }
 
 export default connect(
-  (state) => ({
+  state => ({
     comment: state.comment
   }),
   dispatch => ({

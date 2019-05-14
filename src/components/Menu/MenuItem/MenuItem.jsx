@@ -11,10 +11,8 @@ class MenuItem extends React.Component {
 
     return (
       <NavLink
-        className={
-          "navbar-item"
-        }
-        activeClassName={ href === "/" ? "" : "is-active" }
+        className={"navbar-item"}
+        activeClassName={href === "/" ? "" : "is-active"}
         to={href}
       >
         {children}

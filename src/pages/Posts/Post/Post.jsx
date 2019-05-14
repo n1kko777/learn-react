@@ -20,7 +20,7 @@ class Post extends Component {
 }
 
 export default connect(
-  (state) => ({
+  state => ({
     post: state.post
   }),
   dispatch => ({

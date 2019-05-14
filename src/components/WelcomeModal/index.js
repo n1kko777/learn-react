@@ -1,1 +1,1 @@
-export {default} from "./WelcomeModal"
+export { default } from "./WelcomeModal";

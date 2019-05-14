@@ -11,8 +11,8 @@ import comment from "./comment";
 
 import menuItems from "./menu-items";
 
-import openNav from './open-nav';
-import modal from './modal';
+import openNav from "./open-nav";
+import modal from "./modal";
 
 export default combineReducers({
   users,
