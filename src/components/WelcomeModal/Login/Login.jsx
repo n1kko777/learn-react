@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 
+// Redux
+import { connect } from "react-redux";
+import { toggleModal } from "../../../actions/toggle-modal";
+
 class Login extends Component {
-  
   render() {
+    const { onToggleModal, modal } = this.props;
+
     return (
       <div className="box login-form">
         <div className="field">
@@ -42,7 +47,12 @@ class Login extends Component {
         </div>
         <div className="field">
           <p className="control">
-            <button onClick={()=> {this.props.toggleModal()}} className="button is-success">Login</button>
+            <button
+              onClick={() => onToggleModal(modal)}
+              className="button is-success"
+            >
+              Login
+            </button>
           </p>
         </div>
       </div>
@@ -50,4 +60,13 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(
+  state => ({
+    modal: state.modal
+  }),
+  dispatch => ({
+    onToggleModal: modal => {
+      dispatch(toggleModal(modal));
+    }
+  })
+)(Login);

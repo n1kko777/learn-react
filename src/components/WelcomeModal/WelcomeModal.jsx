@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 
+// Redux
+import { connect } from "react-redux";
+import { toggleModal } from "../../actions/toggle-modal";
+
 import Login from "./Login";
 
 class WelcomeModal extends Component {
   render() {
+    const { onToggleModal, modal } = this.props;
+
     return (
-      <div className={this.props.modal ? "modal is-active" : "modal"}>
-        <div onClick={this.props.toggleModal} className="modal-background" />
+      <div className={modal ? "modal is-active" : "modal"}>
+        <div onClick={() => onToggleModal(modal)} className="modal-background" />
         <div className="modal-content">
-          <Login toggleModal={this.props.toggleModal} />
+          <Login />
         </div>
         <button
-          onClick={this.props.toggleModal}
+          onClick={() => onToggleModal(modal)}
           className="modal-close is-large"
           aria-label="close"
         />
@@ -20,4 +26,13 @@ class WelcomeModal extends Component {
   }
 }
 
-export default WelcomeModal;
+export default connect(
+  state => ({
+    modal: state.modal
+  }),
+  dispatch => ({
+    onToggleModal: (modal) => {
+      dispatch(toggleModal(modal));
+    }
+  })
+)(WelcomeModal);

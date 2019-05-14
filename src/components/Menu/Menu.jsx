@@ -4,12 +4,13 @@ import { NavLink } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 import { toggleNav } from "../../actions/toggle-nav";
+import { toggleModal } from "../../actions/toggle-modal";
 
 import MenuItem from "./MenuItem";
 
 class Menu extends Component {
   render() {
-    const { onToggleNav, openNav, menuItems, toggleModal } = this.props;
+    const { onToggleModal, modal, onToggleNav, openNav, menuItems, toggleModal } = this.props;
 
     const items = menuItems.map((item, i) => (
       <MenuItem
@@ -54,7 +55,7 @@ class Menu extends Component {
               <div className="navbar-item">
                 <div className="buttons">
                   <a className="button is-primary">
-                    <strong onClick={toggleModal}>Вход</strong>
+                    <strong onClick={() => onToggleModal(modal)}>Вход</strong>
                   </a>
                 </div>
               </div>
@@ -69,11 +70,15 @@ class Menu extends Component {
 export default connect(
   state => ({
     menuItems: state.menuItems,
-    openNav: state.openNav
+    openNav: state.openNav,
+    modal: state.modal
   }),
   dispatch => ({
     onToggleNav: (event, openNav) => {
       dispatch(toggleNav(event, openNav));
+    },
+    onToggleModal: (modal) => {
+      dispatch(toggleModal(modal));
     }
   })
 )(Menu);

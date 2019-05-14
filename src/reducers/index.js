@@ -12,6 +12,7 @@ import comment from "./comment";
 import menuItems from "./menu-items";
 
 import openNav from './open-nav';
+import modal from './modal';
 
 export default combineReducers({
   users,
@@ -21,5 +22,6 @@ export default combineReducers({
   comments,
   comment,
   menuItems,
-  openNav
+  openNav,
+  modal
 });
