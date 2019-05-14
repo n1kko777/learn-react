@@ -1,22 +1,18 @@
 import React, { Component } from "react";
-import axios from "axios";
+// Redux
+import { connect } from "react-redux";
+import { fetchUsers } from "../../actions/users";
 
 import User from "./User";
 
 class UserList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: []
-    };
-  }
   render() {
-    if (!this.state.users) {
+    if (!this.props.users) {
       return null;
     }
 
-    const users = this.state.users.map((user, index) => {
-      return <User isLink={true} key={index} {...user} />;
+    const users = this.props.users.map((userItem, index) => {
+      return <User isLink={true} key={index} {...userItem} />;
     });
 
     return (
@@ -28,10 +24,17 @@ class UserList extends Component {
   }
 
   componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/users/").then(response => {
-      this.setState({ users: response.data });
-    });
+    this.props.onFetchUsers();
   }
 }
 
-export default UserList;
+export default connect(
+  state => ({
+    users: state.users
+  }),
+  dispatch => ({
+    onFetchUsers: () => {
+      dispatch(fetchUsers());
+    }
+  })
+)(UserList);

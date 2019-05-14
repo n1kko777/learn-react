@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router";
+import { NavLink } from "react-router-dom";
 
 class User extends Component {
   render() {
     const { name, username, email, phone, website, id, isLink } = this.props;
-
     return (
       <article className="message">
         <div className="message-header">
           <div>
             {isLink ? (
               <>
-                <Link to={`/users/${id}`} className="is-size-4">
+                <NavLink to={`/users/${id}`} className="is-size-4">
                   {name}
-                </Link>
+                </NavLink>
                 <br />
               </>
             ) : (
@@ -33,5 +32,4 @@ class User extends Component {
     );
   }
 }
-
 export default User;

@@ -1,21 +1,17 @@
 import React, { Component } from "react";
-import axios from "axios";
+// Redux
+import { connect } from "react-redux";
+import { fetchComments } from "../../actions/comments";
 
 import Comment from "./Comment";
 
 class CommentList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      comments: []
-    };
-  }
   render() {
-    if (!this.state.comments) {
+    if (!this.props.comments) {
       return null;
     }
 
-    const comments = this.state.comments.map((comment, index) => {
+    const comments = this.props.comments.map((comment, index) => {
       return <Comment isLink={true} key={index} {...comment} />;
     });
 
@@ -28,10 +24,17 @@ class CommentList extends Component {
   }
 
   componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/comments/").then(response => {
-      this.setState({ comments: response.data });
-    });
+    this.props.onFetchComments();
   }
 }
 
-export default CommentList;
+export default connect(
+  state => ({
+    comments: state.comments
+  }),
+  dispatch => ({
+    onFetchComments: () => {
+      dispatch(fetchComments());
+    }
+  })
+)(CommentList);
