@@ -10,13 +10,17 @@ import MenuItem from "./MenuItem";
 
 class Menu extends Component {
   render() {
-    const { onToggleModal, modal, onToggleNav, openNav, menuItems, toggleModal } = this.props;
+    const {
+      onToggleModal,
+      modal,
+      onToggleNav,
+      openNav,
+      menuItems,
+      toggleModal
+    } = this.props;
 
     const items = menuItems.map((item, i) => (
-      <MenuItem
-        key={i}
-        href={item.href}
-      >
+      <MenuItem key={i} href={item.href}>
         {item.name}
       </MenuItem>
     ));
@@ -77,7 +81,7 @@ export default connect(
     onToggleNav: (event, openNav) => {
       dispatch(toggleNav(event, openNav));
     },
-    onToggleModal: (modal) => {
+    onToggleModal: modal => {
       dispatch(toggleModal(modal));
     }
   })

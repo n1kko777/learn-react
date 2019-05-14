@@ -1,5 +1,4 @@
 const menuItems = [
-  { name: "Главная", href: "/" },
   { name: "Пользователи", href: "/users" },
   { name: "Посты", href: "/posts" },
   { name: "Комментарии", href: "/comments" }
